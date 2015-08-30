@@ -13,8 +13,8 @@ import (
 //  "time"
 
 //  "golang.org/x/net/context"
-//  "golang.org/x/oauth2"
-//  "golang.org/x/oauth2/google"
+  "golang.org/x/oauth2"
+  "golang.org/x/oauth2/google"
   "google.golang.org/api/calendar/v3"
   "github.com/codegangsta/cli"
 )
@@ -34,7 +34,10 @@ func main() {
       Usage: "add an event to the calendar",
       Action: func(c *cli.Context) {
   	
-    	  event := &calendar.Event{
+
+	calendarService, err := calendar.New(oauthHttpClient)
+
+        event := &calendar.Event{
       	
         Summary: c.Args().First(),
       	Location: "",
@@ -53,10 +56,15 @@ func main() {
 
     	calendarId := "primary"
     	
-    	event = srv.Events.Insert(calendarId, event).Do()
-    	
-    	
-    	fmt.Printf("Event created: %s\n", event.HtmlLink)
+	event, err = srv.Events.Insert(calendarId, event).Do()
+
+	if err != nil {
+  		
+		log.Fatalf("Unable to create event. %v\n", err)
+
+	}
+
+	fmt.Printf("Event created: %s\n", event.HtmlLink)
 
       },
     },
