@@ -11,6 +11,7 @@ The project serves as a personal introduction to Go and Google APIs. Some links 
 + https://developers.google.com/google-apps/calendar/create-events
 + https://developers.google.com/google-apps/calendar/concepts
 + https://github.com/codegangsta/cli/blob/master/README.md
++ https://github.com/google/google-api-go-client
 + https://godoc.org/google.golang.org/api/calendar/v3
 
 The biggest issue right now is trying to get the "add" method functioning. The API call to create an event is not recognized as valid by the go compiler. If anyone knows of a solution to this, let me know through some medium of communication! I'll be taking a look at the [godoc API documentation](https://godoc.org/google.golang.org/api/calendar/v3) as a next step.
