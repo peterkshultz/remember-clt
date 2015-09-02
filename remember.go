@@ -35,7 +35,7 @@ func main() {
       Action: func(c *cli.Context) {
   	
 
-	calendarService, err := calendar.New(oauthHttpClient)
+	calendarService, err := calendar.New("https://www.googleapis.com/auth/calendar")
 
         event := &calendar.Event{
       	
@@ -56,7 +56,7 @@ func main() {
 
     	calendarId := "primary"
     	
-	event, err = srv.Events.Insert(calendarId, event).Do()
+	event, err = srv.events.insert(calendarId, event).Do()
 
 	if err != nil {
   		
