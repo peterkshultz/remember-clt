@@ -4,6 +4,7 @@ import (
 
     "fmt"
     "os"
+    "github.com/peterkshultz/remember/client_secret.json"
     "golang.org/x/oauth2"
     "golang.org/x/oauth2/google"
     "google.golang.org/api/calendar/v3"
@@ -14,12 +15,32 @@ import (
 
 func main() {
 
+    config := &oauth2.Config {
+
+      ClientID:     "406595811286-kntrl98g7aujgsesob2oi6sfelsqlh4n.apps.googleusercontent.com",
+      ClientSecret: "ypjZIJwF1rnfkn-MqIzQPa3i",
+      Endpoint:     google.Endpoint,
+      Scopes:       []string{calendar.CalendarScope},
+    }
+
+    ctx := context.Background()
+
+    c := newOAuthClient(ctx, config)
+
+    svc, err := calendar.New(c)
+
+    if err != nil {
+
+      panic(err)
+
+    }
+
     app := cli.NewApp()
     app.Name = "remember"
     app.Usage = "utilize the awesome UI that is the command line to create Google Calendar events. Maybe if you use it you'll put your life in order :)"
     app.Action = func(c *cli.Context) {
     
-        println(c.Args().First())
+      println(c.Args().First())
 
     }
 
